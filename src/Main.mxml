@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+    <fx:Script><![CDATA[
+        import mx.controls.Alert;
+        import mx.rpc.events.ResultEvent;
+
+        private function btnSend_clickHandler(event:MouseEvent):void {
+            this.hs.addEventListener(ResultEvent.RESULT, httpsResultHandler);
+            this.hs.send();
+        }
+
+        private function httpsResultHandler(event:ResultEvent):void {
+            Alert.show(event.result.toString(),"返回信息");
+        }
+        ]]></fx:Script>
+    <fx:Declarations>
+        <s:HTTPService id="hs" url="http://localhost:4142/WebSite2/Handler.ashx" method="post">
+            <s:request>
+
+            </s:request>
+        </s:HTTPService>
+    </fx:Declarations>
+    <s:Button id="btnSend" click="btnSend_clickHandler(event)" label="Say Hello"/>
+</s:Application>
